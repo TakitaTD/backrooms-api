@@ -13,7 +13,7 @@ I have don't have the slightest, planck-length miniscule atom of an idea of whet
 
 
 ## Dependencies
-- node.js
+- [NodeJS](https://nodejs.org)
 - an operating system
 - wi-fi
 - a working computer
