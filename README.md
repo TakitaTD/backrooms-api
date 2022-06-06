@@ -14,8 +14,10 @@ I have don't have the slightest, planck-length miniscule atom of an idea of whet
 
 ## Dependencies
 - [NodeJS](https://nodejs.org)
-- an operating system
-- wi-fi
-- a working computer
+- An operating system
+- Wi-Fi
+- A working computer
 - [Java OS](https://en.wikipedia.org/wiki/JavaOS) >= 1.0.0
 - 11 fingers
+- 64 GB RAM
+- A golden toilet
