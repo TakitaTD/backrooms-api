@@ -6,6 +6,7 @@ import { minify } from "html-minifier";
 const MAX = 120;
 let i = 114;
 /* https://stackoverflow.com/questions/48608119/javascript-remove-all-occurrences-of-a-value-from-an-array */
+
 async function removeItem(array, item) {
   var i = array.length;
 
@@ -37,7 +38,21 @@ async function removeItem(array, item) {
       const data = await response.text();
       let dom;
       dom = new JSDOM(data);
+      function getBadFormattedText(text) {
+        return Array.from(
+          dom.window.document.querySelector("#page-content").childNodes
+        )
+          .find(
+            (el) =>
+              el.textContent === text ||
+              el.textContent === text.replace(":", "")
+          )
+          .nextElementSibling.textContent.split("\n")
+          .filter((el) => el !== " " && el !== "");
+      }
       console.clear();
+
+      console.log(getBadFormattedText("Entrances:"));
 
       const levelData = await {
         title: dom.window.document
@@ -53,30 +68,8 @@ async function removeItem(array, item) {
 `
           ),
         images: [],
-        exits: dom.window.document
-          .evaluate(
-            "//span[text()='Exits']",
-            dom.window.document,
-            null,
-            dom.window.XPathResult.ANY_TYPE,
-            null
-          )
-          .iterateNext()
-          .parentElement.nextElementSibling.textContent.split("\n")
-          .filter((el) => el !== ""),
-        entrances: [
-          dom.window.document
-            .evaluate(
-              "//span[text()='Entrances']",
-              dom.window.document,
-              null,
-              dom.window.XPathResult.ANY_TYPE,
-              null
-            )
-            .iterateNext()
-            .parentElement.nextElementSibling.textContent.split("\n")
-            .filter((el) => el !== ""),
-        ],
+        exits: getBadFormattedText("Exits:"),
+        entrances: getBadFormattedText("Entrances:"),
       };
       dom.window.document
         .querySelector("#page-content")
