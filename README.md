@@ -36,3 +36,6 @@ I have don't have the slightest, planck-length miniscule atom of an idea of whet
 - [ ] Parsing entities of level
 
 I think that's it... This is gonna hurt like a [############]
+
+## YOU THERE, HELP GET THIS REPO TO 200k STARS
+Guys, we're only 195k GitHub stars behind [public-apis](https://github.com/public-apis/public-apis). If we band together, we can close this gap and become the first repo to 200k stars!!
