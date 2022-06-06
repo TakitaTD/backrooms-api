@@ -26,48 +26,36 @@ async function removeItem(array, item) {
     }
   }
 
-  // for (let i = 0; i <= MAX; i++) {
-  if (fs.existsSync("assets/level-" + i + ".json")) {
-    console.log("assets/level-" + i + ".json already exists. Skipping...");
-    // continue;
-  } else {
-    const response = await fetch(
-      "http://backrooms-wiki.wikidot.com/level-" + i
-    );
-    const data = await response.text();
-    let dom;
-    dom = new JSDOM(data);
-    console.clear();
+  for (let i = 0; i <= MAX; i++) {
+    if (fs.existsSync("assets/level-" + i + ".json")) {
+      console.log("assets/level-" + i + ".json already exists. Skipping...");
+      // continue;
+    } else {
+      const response = await fetch(
+        "http://backrooms-wiki.wikidot.com/level-" + i
+      );
+      const data = await response.text();
+      let dom;
+      dom = new JSDOM(data);
+      console.clear();
 
-    const levelData = await {
-      title: dom.window.document
-        .querySelector("#page-title")
-        .textContent.toString()
-        .replaceAll("\n", "")
-        .replaceAll("  ", ""),
-      description: dom.window.document
-        .querySelector("#page-content")
-        .textContent.replaceAll(
-          "\n",
-          `
+      const levelData = await {
+        title: dom.window.document
+          .querySelector("#page-title")
+          .textContent.toString()
+          .replaceAll("\n", "")
+          .replaceAll("  ", ""),
+        description: dom.window.document
+          .querySelector("#page-content")
+          .textContent.replaceAll(
+            "\n",
+            `
 `
-        ),
-      images: [],
-      exits: dom.window.document
-        .evaluate(
-          "//span[text()='Exits']",
-          dom.window.document,
-          null,
-          dom.window.XPathResult.ANY_TYPE,
-          null
-        )
-        .iterateNext()
-        .parentElement.nextElementSibling.textContent.split("\n")
-        .filter((el) => el !== ""),
-      entrances: [
-        dom.window.document
+          ),
+        images: [],
+        exits: dom.window.document
           .evaluate(
-            "//span[text()='Entrances']",
+            "//span[text()='Exits']",
             dom.window.document,
             null,
             dom.window.XPathResult.ANY_TYPE,
@@ -76,27 +64,39 @@ async function removeItem(array, item) {
           .iterateNext()
           .parentElement.nextElementSibling.textContent.split("\n")
           .filter((el) => el !== ""),
-      ],
-    };
-    dom.window.document
-      .querySelector("#page-content")
-      .querySelectorAll("img")
-      .forEach((img) => {
-        img.removeAttribute("style");
-        levelData.images.push({
-          src: img.getAttribute("src"),
-          alt: img.getAttribute("alt"),
+        entrances: [
+          dom.window.document
+            .evaluate(
+              "//span[text()='Entrances']",
+              dom.window.document,
+              null,
+              dom.window.XPathResult.ANY_TYPE,
+              null
+            )
+            .iterateNext()
+            .parentElement.nextElementSibling.textContent.split("\n")
+            .filter((el) => el !== ""),
+        ],
+      };
+      dom.window.document
+        .querySelector("#page-content")
+        .querySelectorAll("img")
+        .forEach((img) => {
+          img.removeAttribute("style");
+          levelData.images.push({
+            src: img.getAttribute("src"),
+            alt: img.getAttribute("alt"),
+          });
+          img.remove();
         });
-        img.remove();
-      });
-    console.log(levelData.title);
-    fs.writeFile(
-      "assets/level-" + i + ".json",
-      JSON.stringify(levelData),
-      (err) => {
-        if (err) return console.log("ERROR: " + err);
-      }
-    );
+      console.log(levelData.title);
+      fs.writeFile(
+        "assets/level-" + i + ".json",
+        JSON.stringify(levelData),
+        (err) => {
+          if (err) return console.log("ERROR: " + err);
+        }
+      );
+    }
   }
-  // }
 })();
