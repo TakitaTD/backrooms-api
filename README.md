@@ -25,3 +25,14 @@ I have don't have the slightest, planck-length miniscule atom of an idea of whet
 - 64 GB RAM
 - A golden toilet
 - NVIDIA RTX 4080 Ti
+
+## ROADMAP
+- [x] Parsing title of backrooms level
+- [x] Parsing description of backrooms level (kinda). It doesn't work too well, and I haven't revisited that piece of code in a while. Gonna be a shitstorm
+- [x] Parsing images of backrooms level
+- [x] Parsing entrances and exits of backrooms level. This took so fucking long, that if I had to recreate it, I would kill myself.
+- [ ] Parsing communities & outposts of level
+- [ ] Parsing class of level
+- [ ] Parsing entities of level
+
+I think that's it... This is gonna hurt like a [############]
