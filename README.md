@@ -10,3 +10,12 @@ PFFT-
 I have don't have the slightest, planck-length miniscule atom of an idea of whether this is legal or not. Honestly, I wouldn't be suprised if this repo gets striked within a couple days.
 
 \* Ahem * this tool is purely educational and should only be used for educational purposes..
+
+
+## Dependencies
+- node.js
+- an operating system
+- wi-fi
+- a working computer
+- [Java OS](https://en.wikipedia.org/wiki/JavaOS) >= 1.0.0
+- 11 fingers
