@@ -6,7 +6,7 @@ import { minify } from "html-minifier";
 const MAX = 120;
 let i = 114;
 /* https://stackoverflow.com/questions/48608119/javascript-remove-all-occurrences-of-a-value-from-an-array */
-function removeItem(array, item) {
+async function removeItem(array, item) {
   var i = array.length;
 
   while (i--) {
@@ -39,26 +39,7 @@ function removeItem(array, item) {
     dom = new JSDOM(data);
     console.clear();
 
-    let elements = Array.from(
-      dom.window.document.querySelector("#page-content").childNodes
-    );
-
-    const Exits = dom.window.document
-      .evaluate(
-        "//span[text()='Exits']",
-        dom.window.document,
-        null,
-        dom.window.XPathResult.ANY_TYPE,
-        null
-      )
-      .iterateNext()
-      .parentElement.nextElementSibling.textContent.split("\n");
-
-    removeItem(Exits, "");
-
-    console.log(Exits);
-
-    const levelData = {
+    const levelData = await {
       title: dom.window.document
         .querySelector("#page-title")
         .textContent.toString()
@@ -72,8 +53,30 @@ function removeItem(array, item) {
 `
         ),
       images: [],
-      exits: Exits,
-      entrances: [],
+      exits: dom.window.document
+        .evaluate(
+          "//span[text()='Exits']",
+          dom.window.document,
+          null,
+          dom.window.XPathResult.ANY_TYPE,
+          null
+        )
+        .iterateNext()
+        .parentElement.nextElementSibling.textContent.split("\n")
+        .filter((el) => el !== ""),
+      entrances: [
+        dom.window.document
+          .evaluate(
+            "//span[text()='Entrances']",
+            dom.window.document,
+            null,
+            dom.window.XPathResult.ANY_TYPE,
+            null
+          )
+          .iterateNext()
+          .parentElement.nextElementSibling.textContent.split("\n")
+          .filter((el) => el !== ""),
+      ],
     };
     dom.window.document
       .querySelector("#page-content")
