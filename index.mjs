@@ -38,21 +38,32 @@ async function removeItem(array, item) {
       const data = await response.text();
       let dom;
       dom = new JSDOM(data);
+
+      const window = dom.window;
       function getBadFormattedText(text) {
-        return Array.from(
-          dom.window.document.querySelector("#page-content").childNodes
-        )
-          .find(
-            (el) =>
-              el.textContent === text ||
-              el.textContent === text.replace(":", "")
-          )
-          .nextElementSibling.textContent.split("\n")
-          .filter((el) => el !== " " && el !== "");
+        const elements = Array.from(
+          window.document.querySelector("#page-content").childNodes
+        );
+        let element = elements.find((el) => el.textContent === text);
+        let returnData = [];
+        if (!element) {
+          element = elements.find(
+            (el) => el.textContent === text.replace(":", "")
+          );
+        }
+        while (element.nextSibling.nodeName !== "HR") {
+          element.textContent
+            .split("\n")
+            .filter((el) => el !== "")
+            .filter((el) => el !== " ")
+            .forEach((e) => returnData.push(e));
+          element = element.nextSibling;
+        }
+        return returnData;
       }
       console.clear();
 
-      console.log(getBadFormattedText("Entrances:"));
+      console.log("Entrances:", getBadFormattedText("Entrances:"));
 
       const levelData = await {
         title: dom.window.document

@@ -1,3 +1,9 @@
+## THIS PROJECT HAS BEEN ARCHIVED AS OF 7.6.2022 (d.m.y)
+
+I am archiving this project because JESUS FUCKING CHRIST it's difficult to index a wikidot page.
+Basically every level has a different way of indexing certain things, the only static data I can find on most backrooms pages is the
+fucking title. I'm done. I wasted a long time with trial and error on this one project that doesn't even work. Fuck this.
+
 # backrooms-api
 
 An API for fetching data from the backrooms Wikidot in an organised way.
@@ -27,6 +33,7 @@ I have don't have the slightest, planck-length miniscule atom of an idea of whet
 - NVIDIA RTX 4080 Ti
 
 ## ROADMAP
+
 - [x] Parsing title of backrooms level
 - [x] Parsing description of backrooms level (kinda). It doesn't work too well, and I haven't revisited that piece of code in a while. Gonna be a shitstorm
 - [x] Parsing images of backrooms level
@@ -38,4 +45,5 @@ I have don't have the slightest, planck-length miniscule atom of an idea of whet
 I think that's it... This is gonna hurt like a [############]
 
 ## YOU THERE, HELP GET THIS REPO TO 200k STARS
+
 Guys, we're only 195k GitHub stars behind [public-apis](https://github.com/public-apis/public-apis). If we band together, we can close this gap and become the first repo to 200k stars!!
